@@ -180,15 +180,11 @@ abstract public class SortableNGTest {
         Foo[] set = {three, one, two};
         Foo[] expected = {one, two, three};
         
-        Comparator<Foo> comp = (Foo o1, Foo o2) -> {
-            if (o1 == null && o2 == null) {
-                return 0;
-            }
-            
-            if (o1 == null ||  o1.getValue() < o2.getValue()) {
+        Comparator<Foo> comp = (Foo o1, Foo o2) -> {          
+            if (o2 != null && (o1 == null ||  o1.getValue() < o2.getValue())) {
                 return -1;
             }
-            if (o2 == null || o1.getValue() < o2.getValue()) {
+            if (o1 != null && (o2 == null || o1.getValue() < o2.getValue())) {
                 return 1;
             }
             return 0;

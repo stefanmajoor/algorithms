@@ -1,3 +1,5 @@
 *.xml
 nbproject/
 manifest.mf
+/dist/
+build/

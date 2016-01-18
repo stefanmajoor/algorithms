@@ -5,10 +5,16 @@
  */
 package algorithms.Sorting;
 
+import java.util.Comparator;
+
 /**
  *
  * @author Stefan
  */
-public class InsertionSort {
+public class InsertionSort implements Sortable {
     
+    public <T> T[] sort(T[] set, Comparator<T> comparator)
+    {
+        return set;
+    }
 }

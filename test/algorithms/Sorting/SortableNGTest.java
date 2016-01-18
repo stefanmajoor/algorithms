@@ -5,61 +5,161 @@
  */
 package algorithms.Sorting;
 
-import java.util.ArrayList;
-import static org.testng.Assert.*;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Comparator;
+import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  *
  * @author Stefan
  */
 abstract public class SortableNGTest {
-       
+    
+    // The instance that needs to be tested   
     Sortable sorter;
     
     public SortableNGTest() {
         sorter = this.createClass();
     }
     
+    
+    // Return the class that needs to be tested
     abstract public Sortable createClass();
+    
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @BeforeMethod
-    public void setUpMethod() throws Exception {
-    }
-
-    @AfterMethod
-    public void tearDownMethod() throws Exception {
-    }
-
+    // UNIT TESTS
     @Test
     public void testSimpleSort() {
-        ArrayList<Integer> unsortedSet = new ArrayList();
-        unsortedSet.add(3);
-        unsortedSet.add(5);
-        unsortedSet.add(1);
-        unsortedSet.add(2);
-        unsortedSet.add(4);
+        Integer[] set = {5, 3, 1, 2, 4};
+        Integer[] expected = {1, 2, 3, 4, 5};
         
-        Comparator<Integer> comp = new Comparator() {
-            @Override
-            public int compare(Object o1, Object o2) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Comparator<Integer> comp = (Integer o1, Integer o2) -> {
+            if (o1 < o2) {
+                return -1;
             }
+            if (o1 > o2) {
+                return 1;
+            }
+            return 0;
         };
         
+        Integer[] sorted = sorter.sort(set, comp);
+        assertArrayEquals(expected, sorted);
     }
-
-
+    
+   @Test
+    public void testSimpleSortReverse() {
+        Integer[] set = {5, 3, 1, 2, 4};
+        Integer[] expected = {5, 4, 3, 2, 1};
+        
+        Comparator<Integer> comp = (Integer o1, Integer o2) -> {
+            if (o1 < o2) {
+                return 1;
+            }
+            if (o1 > o2) {
+                return -1;
+            }
+            return 0;
+        };
+        
+        Integer[] sorted = sorter.sort(set, comp);
+        assertArrayEquals(expected, sorted);
+    }
+    
+    @Test
+    public void testSortedSet() {
+        Integer[] set = {1, 2, 3, 4, 5};
+        Integer[] expected = {1, 2, 3, 4, 5};
+        
+        Comparator<Integer> comp = (Integer o1, Integer o2) -> {
+            if (o1 < o2) {
+                return -1;
+            }
+            if (o1 > o2) {
+                return 1;
+            }
+            return 0;
+        };
+        
+        Integer[] sorted = sorter.sort(set, comp);
+        assertArrayEquals(expected, sorted);
+    }
+    
+    @Test
+    public void testTotallyUnSortedSet() {
+        Integer[] set = {5, 4, 3, 2, 1};
+        Integer[] expected = {1, 2, 3, 4, 5};
+        
+        Comparator<Integer> comp = (Integer o1, Integer o2) -> {
+            if (o1 < o2) {
+                return -1;
+            }
+            if (o1 > o2) {
+                return 1;
+            }
+            return 0;
+        };
+        
+        Integer[] sorted = sorter.sort(set, comp);
+        assertArrayEquals(expected, sorted);
+    }
+    
+    @Test
+    public void testEmptySet() {
+        Integer[] set = {};
+        Integer[] expected = {};
+        
+        Comparator<Integer> comp = (Integer o1, Integer o2) -> {
+            if (o1 < o2) {
+                return -1;
+            }
+            if (o1 > o2) {
+                return 1;
+            }
+            return 0;
+        };
+        
+        Integer[] sorted = sorter.sort(set, comp);
+        
+        assertArrayEquals(expected, sorted);
+    }
+    
+    @Test
+    public void testNonInteger() {
+        Foo one = new Foo(1);
+        Foo two = new Foo(2);
+        Foo three = new Foo(3);
+        
+        Foo[] set = {three, one, two};
+        Foo[] expected = {one, two, three};
+        
+        Comparator<Foo> comp = (Foo o1, Foo o2) -> {
+            if (o1.getValue() < o2.getValue()) {
+                return -1;
+            }
+            if (o1.getValue() < o2.getValue()) {
+                return 1;
+            }
+            return 0;
+        };
+        
+        Foo[] sorted = sorter.sort(set, comp);
+        
+        assertArrayEquals(expected, sorted);
+    }
+    
+    class Foo
+    {
+        int i;
+        
+        Foo(int i)
+        {
+            this.i = i;
+        }
+        
+        int getValue() {
+            return i;
+        };
+    }
+}

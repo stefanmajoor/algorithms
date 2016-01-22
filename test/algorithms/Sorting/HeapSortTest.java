@@ -16,10 +16,10 @@ import static org.junit.Assert.*;
  *
  * @author Stefan
  */
-public class InsertionSortTest extends SortableNGTest {
+public class HeapSortTest extends SortableNGTest {
     
     @Override
     public Sortable createClass() {
-        return new InsertionSort();
+        return new HeapSort();
     }
 }

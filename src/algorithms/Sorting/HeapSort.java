@@ -14,10 +14,8 @@ public class HeapSort implements Sortable {
     public <T> T[] sort(T[] set, Comparator<T> comparator) {
         MaxHeap<T> heap = new MaxHeap(set, comparator);
         
-        System.out.println("------");
         for (int i = 0; i < set.length; i++) {
             set[i] = heap.extract();
-            System.out.println(i + " " + set[i]);
         }
         
         return set;

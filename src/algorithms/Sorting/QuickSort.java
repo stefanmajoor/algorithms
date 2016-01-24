@@ -5,6 +5,7 @@
  */
 package algorithms.Sorting;
 
+import algorithms.Structures.ArrayObject;
 import java.util.Comparator;
 
 /**
@@ -63,26 +64,5 @@ public class QuickSort implements Sortable {
         set.swap(i + 1, r);
         
         return i + 1;
-    } 
-    
-    /**
-     * Hack to allow arrays to be passed by reference
-     * 
-     * @param <T> 
-     */
-    protected class ArrayObject<T> {
-        public ArrayObject(T[] set) {
-            this.content = set;
-        }
-        
-        public T[] content;
-        
-        public void swap(int i, int j)
-        {
-            // Exchange a[i+1] with A[r]
-            T swap = this.content[i];
-            this.content[i] = this.content[j];
-            this.content[j] = swap;
-        }
     }
 }

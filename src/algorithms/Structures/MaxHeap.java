@@ -176,6 +176,4 @@ public class MaxHeap<T> implements Heap<T> {
     protected int right(int i) {
         return 2*(i+1);
     } 
-
-
 }
